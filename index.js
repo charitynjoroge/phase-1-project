@@ -7,12 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-   function displayImage(){
+   function displayImage(image){
+    for(let i =0;i<image.length;i++){
     images.src = `https://picsum.photos/id/${currentIndex}/200/300`
     //reset likes and dislikes for a new image 
     document.addEventListener("click", (e) => {
         e.preventDefault();
     })
+}
 }
 
 document.getElementById("previousButton").addEventListener("click",function(){
