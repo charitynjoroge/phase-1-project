@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
    const images = document.getElementById("images")
-   let currentIndex = 1
+   let currentIndex = 0
    let likeCount = 0
    let dislikeCount = 0
    
@@ -27,11 +27,12 @@ document.getElementById("nextButton").addEventListener("click",function(){
 })
 console.log();
 
-    
+    function reset(){
     let isLiked = false
    let isDisLiked = false
     document.getElementById("likeCount").innerText = likeCount;
     document.getElementById("dislikeCount").innerText = dislikeCount;
+    
 
 
 document.getElementById("likeButton").addEventListener("click", function(){
@@ -62,7 +63,10 @@ document.getElementById("dislikeButton").addEventListener("click", function(){
         isLiked = false
     }
 
-    }
+   }
+
+
+
 })
 
 
@@ -77,12 +81,14 @@ document.getElementById("commentButton").addEventListener("click",function(){
     document.getElementById("commentDisplay").appendChild(commentElement);
     document.getElementById("commentText").value = "";
 
-commentText.forEach(images => {
-        console.log(images)
-        
-    });
+
+
+
+
 })
 
 
+    }
+reset();
 
 })

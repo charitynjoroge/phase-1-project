@@ -21,19 +21,23 @@ h3{
 
 #previousButton{
     margin-left: 550px;
+    background-color: bisque;
 }
 
 #nextButton{
     margin-left: 600px;
+    background-color: bisque;
 }
 #likeDislikeButtons{
     margin-left: 550px;
     border-radius: 10px;
     border-bottom: 5px;
+    border-color: grey;
+    color: black;
     
 }
 body{
-    background-color: bisque;
+    background-color: rgb(250, 161, 83);
 }
 
 .material-symbols-outlined {
@@ -48,5 +52,8 @@ body{
 #commentButtons{
 border-top: 0px;
 margin-left: 550px;
+border-color: bisque;
+
 }
+
 
