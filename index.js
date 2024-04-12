@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+ document.addEventListener("DOMContentLoaded", () => {
    const images = document.getElementById("images")
    let commentbtn = document.getElementById('commentButton')
    let currentIndex = 0
@@ -108,7 +108,7 @@ document.getElementById("commentButton").addEventListener("click",function(){
     let commentElement = document.createElement("p")
     commentElement.textContent = commentText;
 
-    document.getElementById("commentDisplay").appendChild(commentElement);
+  
     document.getElementById("commentText").value = "";
     commentText++
     loadComments();
@@ -124,16 +124,7 @@ addComment()
 
 function addComment() {
     const commentText = document.getElementById("commentText").value;
-    fetch('http://localhost:3000/comments', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        'comment': commentText,
-        'id': currentIndex // Add the image index for association
-      })
-    })
+    fetch('./db.json')
     .then(res => res.json())
     .then(data => {
       console.log(data);
@@ -148,41 +139,52 @@ function addComment() {
   function loadComments() {
     fetch("./db.json") //adjust path if db.json is located elsewhere
       .then((response) => response.json())
-      .then((db) => {
-        const commentDisplay = document.getElementById("commentDisplay");
-        commentDisplay.innerHTML = ""; // Clear previous comments
-
+      .then((data) => {
+      //const commentsDisplay = document.getElementById("commentsDisplay").value
+        commentsDisplay.innerHTML = ''; 
+        //create a new element
+        const ul = document.createElement("ul");
+        //filter comments for the current image
         // Find comments for the current image
-        const comments = db.comments.filter(
-          (comment) => comment.id === currentIndex 
+        const comments = data.comments.filter(
+          (comment) => comment.id === currentIndex.toString()
         );
+        
+
+        //loop through the comments and add them to the list
         comments.forEach(comment => {
-          const commentElement = document.createElement("p");
-          commentElement.textContent = comment.comment;
-          commentDisplay.appendChild(commentElement)
+          const li = document.createElement("li")
+          li.textContent = comment.comment;
+          ul.appendChild(li);
           
         })
+        //append the list to the comments container
+        commentsDisplay.appendChild(ul)
+        
 
       })
       .catch(error => console.error("Error loading comments",error))
     }
+    loadComments()
         
 
-        // Update like and dislike counts based on comments
-        likeCount = 0;
-        dislikeCount = 0;
-        //currentImageComments.forEach((comment) => {
-          //if (comment.like) likeCount++;
-          //if (comment.dislike) dislikeCount++;
-       // });
+      document.getElementById("commentButton").addEventListener("click", function(){
+        const commentInput = document.getElementById("commentText");
+        const commentText = commentInput.value.trim();
 
-        // Update DOM elements with like and dislike counts
-        document.getElementById("likeCount").innerText = likeCount;
-        document.getElementById("dislikeCount").innerText = dislikeCount;
+        if (commentText){
+          const li = document.createElement("li");
+          li.textContent = commentText;
 
-        // ... rest of your logic to display comments ...
-        console.log(loadComments);
-      
+          if (commentsDisplay.getElementsByTagName("ul").length === 0) {
+            const ul = document.createElement("ul");
+            commentsDisplay.appendChild(ul)
+          }
+          commentsDisplay.getElementsByTagName("ul")[0].appendChild(li)
+          commentInput.value = ""; //clear the input after adding the comment
+        }
+      })
+      displayImage()
 
 addComment()
   loadComments();
