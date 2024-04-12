@@ -140,30 +140,41 @@ function addComment() {
       document.getElementById("commentText").value = "";
       loadComments(); // Refresh comments after adding a new one
     })
-    //.catch(error => console.error("Error adding comment:", error)); // Handle errors
+    .catch(error => console.error("Error adding comment:", error)); // Handle errors
   }
   
 
 
   function loadComments() {
-    fetch("http://localhost:3000/comments")
+    fetch("./db.json") //adjust path if db.json is located elsewhere
       .then((response) => response.json())
-      .then((data) => {
+      .then((db) => {
         const commentDisplay = document.getElementById("commentDisplay");
         commentDisplay.innerHTML = ""; // Clear previous comments
 
         // Find comments for the current image
-        const currentImageComments = data.comments.filter(
+        const comments = db.comments.filter(
           (comment) => comment.id === currentIndex 
         );
+        comments.forEach(comment => {
+          const commentElement = document.createElement("p");
+          commentElement.textContent = comment.comment;
+          commentDisplay.appendChild(commentElement)
+          
+        })
+
+      })
+      .catch(error => console.error("Error loading comments",error))
+    }
+        
 
         // Update like and dislike counts based on comments
         likeCount = 0;
         dislikeCount = 0;
-        currentImageComments.forEach((comment) => {
-          if (comment.like) likeCount++;
-          if (comment.dislike) dislikeCount++;
-        });
+        //currentImageComments.forEach((comment) => {
+          //if (comment.like) likeCount++;
+          //if (comment.dislike) dislikeCount++;
+       // });
 
         // Update DOM elements with like and dislike counts
         document.getElementById("likeCount").innerText = likeCount;
@@ -171,15 +182,8 @@ function addComment() {
 
         // ... rest of your logic to display comments ...
         console.log(loadComments);
-      });
-  }
+      
 
-
-
-
-
-
-  
 addComment()
   loadComments();
  reset();
