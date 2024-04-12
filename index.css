@@ -51,9 +51,7 @@ h3{
     color: black;
     
 }
-body{
-    background-color: rgb(250, 161, 83);
-}
+
 
 .material-symbols-outlined {
   font-variation-settings:
@@ -78,4 +76,6 @@ border-color: bisque;
   font-style: normal;
 }
 
-
+body{
+  background-color: rgb(245, 148, 29);
+}
