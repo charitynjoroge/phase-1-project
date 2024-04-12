@@ -2,12 +2,14 @@
     width: 800px;
     margin-top: 20px;
     margin-left: 550px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 #images{
-    width: 780px;
+    width: 800px;
     height: 580px;
     border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 h1{
     text-align: center;
@@ -77,6 +79,5 @@ border-color: bisque;
 }
 
 body{
-  background-image: url(https://images.pexels.com/photos/2680270/pexels-photo-2680270.jpeg?auto=compress&cs=tinysrgb&w=600); 
-  
+  background-color: rgb(252, 148, 22);
 }
